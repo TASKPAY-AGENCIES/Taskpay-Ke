@@ -10,7 +10,7 @@
   --primary: #4F46E5;
   --success: #22C55E;
   --warning: #F59E0B;
-  --bg: #F8FAFC;
+  --bg: #F1F5F9;
   --card: #FFFFFF;
   --border: #E2E8F0;
   --text: #1E293B;
@@ -21,7 +21,7 @@ body { background: var(--bg); color: var(--text); }
 .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 .page { display: none; }.page.active { display: block; }
 
-.navbar { background: var(--card); padding: 16px 20px; position: sticky; top: 0; z-index: 99; border-bottom:1px solid var(--border); box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.navbar { background: var(--card); padding: 16px 20px; position: sticky; top: 0; z-index: 99; border-bottom:1px solid var(--border); }
 .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; }
 .nav-btns { display: flex; gap: 12px; align-items:center; }
@@ -34,24 +34,28 @@ body { background: var(--bg); color: var(--text); }
 
 .hero { padding: 60px 20px 80px; text-align: center; background: linear-gradient(135deg, #EEF2FF, #F8FAFC); }
 .hero-img { width: 100%; max-width: 500px; margin: 0 auto 30px; border-radius: 20px; }
-.hero h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 18px; }
+.hero h1 { font-size: 2.8rem; font-weight: 800; }
 .hero h1 span { color: var(--success); }
-.hero p { font-size: 1.1rem; color:var(--text-dim); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-.card { background: var(--card); padding: 28px; border-radius: 20px; margin-bottom: 20px; border:1px solid var(--border); box-shadow:0 4px 12px rgba(0,0,0,0.04); }
+.card { background: var(--card); padding: 28px; border-radius: 20px; margin-bottom: 20px; border:1px solid var(--border); }
 label { font-weight: 600; font-size: 0.9rem; color:var(--text-dim); }
 input { width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--border); color:var(--text); border-radius: 12px; margin: 8px 0 18px; font-size: 1rem; }
 
-.menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 24px 0; }
-@media (min-width: 768px) {.menu { grid-template-columns: repeat(4, 1fr); }
-.menu-item { background: var(--card); padding: 18px; border-radius: 14px; text-align: center; font-weight: 600; cursor: pointer; border:1px solid var(--border); }
+/* NEW PRO MENU - BOTTOM NAV STYLE */
+.menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0 30px; }
+.menu-item { background: var(--card); padding: 16px 10px; border-radius: 16px; text-align: center; font-weight: 600; cursor: pointer; border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; gap:6px; font-size:0.85rem; }
+.menu-item i{font-size:1.4rem; color:var(--primary)}
 .menu-item.active { background: var(--primary); color: #fff; }
+.menu-item.active i{color:#fff}
 
+/* NEW PRO STATS - 2x2 CARDS */
 .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-@media (min-width: 768px) {.stats { grid-template-columns: repeat(4, 1fr); } }
-.stat { background: var(--card); padding: 24px; border-radius: 16px; text-align: center; border:1px solid var(--border); }
-.stat h4 { font-size: 0.9rem; color:var(--text-dim); }
-.stat h2 { color: var(--success); font-size: 2rem; margin-top: 6px; font-weight:800; }
+.stat { background: var(--card); padding: 20px; border-radius: 16px; border:1px solid var(--border); display:flex; flex-direction:column; gap:8px; }
+.stat-top{display:flex; justify-content:space-between; align-items:center;}
+.stat-icon{width:45px; height:45px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem;}
+.stat h4 { font-size: 0.9rem; color:var(--text-dim); font-weight:500; }
+.stat h2 { color: var(--text); font-size: 1.8rem; font-weight:800; }
+.stat h2 span{color:var(--success)}
 
 .tasks { display: grid; grid-template-columns: 1fr; gap: 18px; }
 @media (min-width: 600px) {.tasks { grid-template-columns: repeat(2, 1fr); } }
@@ -59,14 +63,7 @@ input { width: 100%; padding: 14px 16px; background: var(--bg); border: 1px soli
 .task h4{font-size:1.1rem; margin-bottom:6px;}
 .task p{color:var(--text-dim); font-size:1rem; margin-bottom:12px;}
 .task p b{color:var(--success); font-size:1.2rem;}
-.locked { 
-  position: absolute; inset: 0; 
-  background: rgba(248,250,252,0.9); 
-  color: var(--text); 
-  display: flex; flex-direction:column; align-items: center; justify-content: center; 
-  border-radius: 16px; font-weight: 700; gap:8px; 
-  border:2px dashed var(--border);
-}
+.locked { position: absolute; inset: 0; background: rgba(241,245,249,0.9); color: var(--text); display: flex; flex-direction:column; align-items: center; justify-content: center; border-radius: 16px; font-weight: 700; gap:8px; border:2px dashed var(--border); }
 .locked i{font-size:1.8rem; color:var(--warning)}
 .toast { position: fixed; bottom: 24px; right: 24px; background: var(--success); color: #fff; padding: 16px 20px; border-radius: 12px; display: none; z-index: 999; font-weight:600; }
 .row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
@@ -124,47 +121,79 @@ input { width: 100%; padding: 14px 16px; background: var(--bg); border: 1px soli
   </div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- DASHBOARD - NEW LAYOUT -->
 <div id="dashboard" class="page container">
-  <h2 style="font-size:2rem;">Welcome, <span id="d_name"></span></h2>
-  <p style="color:var(--text-dim); margin-bottom:10px;">Status: <b id="d_status">INACTIVE</b></p>
+  <h2 style="font-size:2rem;">Welcome, <span id="d_name"></span> 👋</h2>
+  <p style="color:var(--text-dim); margin-bottom:20px;">Status: <b id="d_status" style="color:var(--warning)">INACTIVE</b></p>
+
   <div id="activateBanner" class="card" style="background:#FEF3C7; color:#92400E; display:none;">
     <h3><i class="fas fa-lock"></i> Account Inactive</h3>
-    <button class="btn btn-warning" style="width:100%; margin-top:10px;" onclick="go('activate')">Activate - KSH 99</button>
+    <p>Pay KSH 99 to unlock all 20 tasks</p>
+    <button class="btn btn-warning" style="width:100%; margin-top:10px;" onclick="go('activate')">Activate Now</button>
   </div>
   <div id="pendingBanner" class="card" style="background:#DBEAFE; color:#1E40AF; display:none;">
     <h3><i class="fas fa-clock"></i> Approval Pending</h3>
   </div>
+
+  <!-- PRO MENU WITH ICONS -->
   <div class="menu">
-    <div class="menu-item" onclick="go('dashboard')">Dashboard</div>
-    <div class="menu-item" onclick="go('tasks')">Tasks</div>
-    <div class="menu-item" onclick="go('account')">Account</div>
-    <div class="menu-item" onclick="go('withdraw')">Withdraw</div>
+    <div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div>
+    <div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div>
+    <div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div>
+    <div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div>
   </div>
+
+  <!-- PRO STATS CARDS -->
   <div class="stats">
-    <div class="stat"><h4>Balance</h4><h2>KSH <span id="d_bal">0</span></h2></div>
-    <div class="stat"><h4>Total Earned</h4><h2>KSH <span id="d_earn">0</span></h2></div>
-    <div class="stat"><h4>Tasks Done</h4><h2 id="d_done">0</h2></div>
-    <div class="stat"><h4>Available Tasks</h4><h2>20</h2></div>
+    <div class="stat">
+      <div class="stat-top">
+        <h4>Balance</h4>
+        <div class="stat-icon" style="background:#DCFCE7; color:var(--success)"><i class="fas fa-wallet"></i></div>
+      </div>
+      <h2>KSH <span id="d_bal">0</span></h2>
+    </div>
+    <div class="stat">
+      <div class="stat-top">
+        <h4>Total Earned</h4>
+        <div class="stat-icon" style="background:#DBEAFE; color:var(--primary)"><i class="fas fa-chart-line"></i></div>
+      </div>
+      <h2>KSH <span id="d_earn">0</span></h2>
+    </div>
+    <div class="stat">
+      <div class="stat-top">
+        <h4>Tasks Done</h4>
+        <div class="stat-icon" style="background:#FEE2E2; color:#EF4444"><i class="fas fa-check-circle"></i></div>
+      </div>
+      <h2 id="d_done">0</h2>
+    </div>
+    <div class="stat">
+      <div class="stat-top">
+        <h4>Available Tasks</h4>
+        <div class="stat-icon" style="background:#FEF3C7; color:var(--warning)"><i class="fas fa-briefcase"></i></div>
+      </div>
+      <h2>20</h2>
+    </div>
   </div>
-  <h3 style="margin-top:30px; font-size:1.4rem;">Recent Tasks</h3><div class="tasks" id="taskList"></div>
+
+  <h3 style="margin-top:30px; font-size:1.4rem;">Recent Tasks</h3>
+  <div class="tasks" id="taskList"></div>
 </div>
 
 <!-- TASKS -->
 <div id="tasks" class="page container"><h2 style="font-size:2rem; margin-bottom:10px;">All Premium Tasks</h2>
-  <div class="menu"><div class="menu-item" onclick="go('dashboard')">Dashboard</div><div class="menu-item" onclick="go('tasks')">Tasks</div><div class="menu-item" onclick="go('account')">Account</div><div class="menu-item" onclick="go('withdraw')">Withdraw</div></div>
+  <div class="menu"><div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div><div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div><div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div><div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div></div>
   <div class="tasks" id="taskList2"></div>
 </div>
 
 <!-- ACCOUNT -->
 <div id="account" class="page container" style="max-width:700px;"><h2 style="font-size:2rem; margin-bottom:10px;">My Account</h2>
-  <div class="menu"><div class="menu-item" onclick="go('dashboard')">Dashboard</div><div class="menu-item" onclick="go('tasks')">Tasks</div><div class="menu-item" onclick="go('account')">Account</div><div class="menu-item" onclick="go('withdraw')">Withdraw</div></div>
+  <div class="menu"><div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div><div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div><div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div><div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div></div>
   <div class="card"><h3 id="acc_name" style="font-size:1.5rem;"></h3><h2 style="color:var(--success); margin:15px 0; font-size:2.2rem;">KSH <span id="acc_balance">0</span></h2><div class="row"><span>Phone</span> <b id="acc_phone"></b></div><div class="row"><span>Email</span> <b id="acc_email"></b></div><div class="row"><span>Status</span> <b id="acc_status"></b></div></div>
 </div>
 
 <!-- WITHDRAW -->
 <div id="withdraw" class="page container" style="max-width:600px;"><h2 style="font-size:2rem; margin-bottom:10px;">Withdraw to M-Pesa</h2>
-  <div class="menu"><div class="menu-item" onclick="go('dashboard')">Dashboard</div><div class="menu-item" onclick="go('tasks')">Tasks</div><div class="menu-item" onclick="go('account')">Account</div><div class="menu-item" onclick="go('withdraw')">Withdraw</div></div>
+  <div class="menu"><div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div><div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div><div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div><div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div></div>
   <div class="card"><form onsubmit="withdraw(event)"><label>Amount KSH</label><input id="wd_amount" type="number" min="100" required><label>M-Pesa Number</label><input id="wd_phone" readonly><button class="btn btn-success" style="width:100%; padding:16px;">Request Withdrawal</button></form></div>
 </div>
 
@@ -211,6 +240,8 @@ function toast(msg){ let t=document.getElementById('toast'); t.innerText=msg; t.
 function go(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(page).classList.add('active');
+  document.querySelectorAll('.menu-item').forEach(m=>m.classList.remove('active'));
+  document.querySelectorAll(`.menu-item[onclick*="${page}"]`).forEach(m=>m.classList.add('active'));
   if(page=='dashboard') loadDashboard();
   if(page=='tasks') loadTasks();
   if(page=='account') loadAccount();
@@ -248,9 +279,9 @@ function loadDashboard(){
   document.getElementById('nav-bal').innerText=user.bal;
   document.getElementById('d_earn').innerText=user.earned;
   document.getElementById('d_done').innerText=user.done;
-  if(user.status==0){document.getElementById('d_status').innerText='INACTIVE'; document.getElementById('activateBanner').style.display='block';}
-  if(user.status=='pending'){document.getElementById('d_status').innerText='PENDING'; document.getElementById('pendingBanner').style.display='block';}
-  if(user.status==1){document.getElementById('d_status').innerText='ACTIVE';}
+  if(user.status==0){document.getElementById('d_status').innerText='INACTIVE'; document.getElementById('d_status').style.color='#EF4444'; document.getElementById('activateBanner').style.display='block';}
+  if(user.status=='pending'){document.getElementById('d_status').innerText='PENDING'; document.getElementById('d_status').style.color='#3B82F6'; document.getElementById('pendingBanner').style.display='block';}
+  if(user.status==1){document.getElementById('d_status').innerText='ACTIVE'; document.getElementById('d_status').style.color='var(--success)';}
   document.getElementById('taskList').innerHTML = TASKS.slice(0,4).map((t,i)=>`
     <div class="task">
       <h4>${t.name}</h4>
@@ -328,4 +359,4 @@ window.onload = ()=>{
 }
 </script>
 </body>
-                                           </html>
+  </html>
