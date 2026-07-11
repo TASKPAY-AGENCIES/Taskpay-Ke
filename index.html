@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskPay KE - Earn Real KSH</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #2563EB; --success: #16A34A; --dark: #0F172A; --light: #F8FAFC; --warning: #F59E0B; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: var(--light); color: var(--dark); }
+.container { max-width: 1100px; margin: 0 auto; padding: 16px; }
+.page { display: none; }.page.active { display: block; }
+
+/* PRO NAVBAR */
+.navbar { background: #fff; padding: 12px 16px; position: sticky; top: 0; z-index: 99; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+.nav-btns { display: flex; gap: 8px; }
+.btn { padding: 9px 16px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+.btn-success { background: var(--success); color: #fff; }
+.btn-warning { background: var(--warning); color: #fff; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* PRO HERO */
+.hero { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); padding: 50px 20px 60px; text-align: center; }
+.hero-img { width: 100%; max-width: 320px; margin: 0 auto 20px; border-radius: 20px; } /* YOUR IMAGE */
+.hero h1 { font-size: 2.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+.hero h1 span { color: var(--success); }
+.hero p { font-size: 1rem; opacity: 0.8; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+/* TRUST BADGES */
+.badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+.badge { background: #fff; padding: 10px 14px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.85rem; }
+.badge i { color: var(--success); }
+
+.card { background: #fff; padding: 20px; border-radius: 14px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+label { font-weight: 600; font-size: 0.9rem; }
+input { width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px; margin: 8px 0 14px; font-size: 1rem; }
+input[readonly] { background: #F1F5F9; color: #64748B; }
+.menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0; }
+@media (min-width: 768px) {.menu { grid-template-columns: repeat(4, 1fr); } }
+.menu-item { background: #fff; padding: 14px; border-radius: 12px; text-align: center; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.menu-item.active { background: var(--primary); color: #fff; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 768px) {.stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: #fff; padding: 18px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.stat h4 { font-size: 0.9rem; opacity: 0.7; }
+.stat h2 { color: var(--success); font-size: 1.6rem; margin-top: 4px; }
+.tasks { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 600px) {.tasks { grid-template-columns: repeat(2, 1fr); } }
+.task { background: #fff; padding: 16px; border-radius: 14px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.locked { position: absolute; inset: 0; background: rgba(15,23,42,0.85); color: #fff; display: flex; flex-direction:column; align-items: center; justify-content: center; border-radius: 14px; font-weight: 700; gap:8px; cursor: pointer; }
+.toast { position: fixed; bottom: 16px; right: 16px; background: var(--success); color: #fff; padding: 12px 16px; border-radius: 10px; display: none; z-index: 999; }
+.avatar { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px; }
+.row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F1F5F9; }
+.activate-banner { background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-left: 4px solid var(--warning); padding: 16px; border-radius: 12px; margin-bottom: 16px; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 16px; }
+.modal.active { display: flex; }
+.modal-card { background: #fff; padding: 24px; border-radius: 16px; max-width: 420px; width: 100%; text-align: center; }
+.spinner { border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; width: 16px; height: 16px; animation: spin 0.8s linear infinite; display: none; margin-right: 6px; }
+@keyframes spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="activationModal">
+  <div class="modal-card">
+    <i class="fas fa-lock" style="font-size:2.5rem; color:var(--warning); margin-bottom:10px;"></i>
+    <h2>Unlock All Tasks</h2>
+    <p style="margin:10px 0;">Pay <b>KSH 99</b> one-time activation fee to start earning</p>
+    <button class="btn btn-warning" style="width:100%;" onclick="show('activate'); closeModal()">Pay KSH 99 Now</button>
+    <button class="btn" style="width:100%; margin-top:10px; background:#94A3B8;" onclick="closeModal()">Maybe Later</button>
+  </div>
+</div>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><i class="fas fa-bridge"></i> TaskPay KE</div>
+    <div id="nav-guest" class="nav-btns">
+      <button class="btn btn-outline" onclick="show('login')">Login</button>
+      <button class="btn btn-success" onclick="show('register')">Register</button>
+    </div>
+    <div id="nav-user" class="nav-btns" style="display:none;">
+      <span style="font-weight:600; font-size:0.9rem;" id="nav-name"></span>
+      <button class="btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME / LANDING PAGE WITH YOUR IMAGE -->
+<div id="home" class="page active">
+  <section class="hero">
+    <img src="https://i.postimg.cc/BZBtBL4g/Gemini-Generated-Image-pv8ovbpv8ovbpv8o.png" class="hero-img" alt="Earn Money">
+    <h1>Earn Real <span>KSH</span> From Your Phone</h1>
+    <p>Complete 20+ Premium Tasks Daily. Instant Withdraw to M-Pesa. KSH 300-500 per task</p>
+    <button class="btn btn-success" style="padding:14px 28px; font-size:1rem;" onclick="show('register')">
+      Get Started Free <i class="fas fa-arrow-right"></i>
+    </button>
+
+    <div class="badges">
+      <div class="badge"><i class="fas fa-shield-halved"></i> 100% Secure</div>
+      <div class="badge"><i class="fas fa-bolt"></i> Instant M-Pesa</div>
+      <div class="badge"><i class="fas fa-users"></i> 5000+ Users</div>
+    </div>
+  </section>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="page container" style="max-width:450px; padding-top:30px;">
+  <div class="card"><h2>Create Account</h2>
+    <form onsubmit="reg(event)">
+      <label>Full Name</label><input id="r_name" required>
+      <label>Phone Number</label><input id="r_phone" type="tel" placeholder="07XXXXXXXX" required>
+      <label>Email</label><input id="r_email" type="email" required>
+      <label>Password</label><input id="r_pass" type="password" required>
+      <button id="regBtn" class="btn btn-success" style="width:100%;"><span class="spinner"></span><span>Create Account</span></button>
+    </form>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="page container" style="max-width:450px; padding-top:30px;">
+  <div class="card"><h2>Login</h2>
+    <form onsubmit="log(event)">
+      <label>Email</label><input id="l_email" type="email" required>
+      <label>Password</label><input id="l_pass" type="password" required>
+      <button id="logBtn" class="btn" style="width:100%;"><span class="spinner"></span><span>Login</span></button>
+    </form>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="page container">
+  <h2>Welcome, <span id="d_name"></span></h2>
+  <p>Status: <b id="d_status">INACTIVE</b></p>
+  <div id="activateBanner" class="activate-banner" style="display:none;">
+    <h3><i class="fas fa-lock"></i> Account Inactive</h3>
+    <p>Pay KSH 99 to unlock 20 premium tasks and start earning KSH 300-500 per task</p>
+    <button class="btn btn-warning" style="width:100%; margin-top:10px;" onclick="show('activate')"><i class="fas fa-bolt"></i> Activate Account - KSH 99</button>
+  </div>
+  <div class="menu"><div class="menu-item active" onclick="show('dashboard')"><i class="fas fa-home"></i> Dashboard</div><div class="menu-item" onclick="show('tasks')"><i class="fas fa-tasks"></i> Tasks</div><div class="menu-item" onclick="show('account')"><i class="fas fa-user-circle"></i> Account</div><div class="menu-item" onclick="show('withdraw')"><i class="fas fa-money-bill-transfer"></i> Withdraw</div></div>
+  <div class="stats"><div class="stat"><h4>Balance</h4><h2>KSH <span id="d_bal">0</span></h2></div><div class="stat"><h4>Earned</h4><h2>KSH <span id="d_earn">0</span></h2></div><div class="stat"><h4>Done</h4><h2 id="d_done">0</h2></div><div class="stat"><h4>Tasks</h4><h2>20</h2></div></div>
+  <h3 style="margin-top:20px;">Recent Tasks</h3><div class="tasks" id="taskList"></div>
+</div>
+
+<!-- TASKS -->
+<div id="tasks" class="page container"><h2>All 20 Tasks</h2><div class="tasks" id="taskList2"></div></div>
+
+<!-- ACCOUNT -->
+<div id="account" class="page container" style="max-width:600px;"><h2>My Account</h2><div class="card"><div style="text-align:center;"><img src="https://i.pravatar.cc/80" class="avatar"><h3 id="acc_name"></h3></div><h4>Account Balance</h4><div class="card" style="background:#F0FDF4; text-align:center;"><h2 style="color:var(--success); font-size:2rem;">KSH <span id="acc_balance">0.00</span></h2><button class="btn btn-success" style="width:100%; margin-top:10px;" onclick="show('withdraw')"><i class="fas fa-money-bill-transfer"></i> Withdraw Money</button></div><h4 style="margin:16px 0 10px;">Personal Data</h4><div class="row"><span>Full Name</span> <b id="acc_fullname"></b></div><div class="row"><span>Phone</span> <b id="acc_phone"></b></div><div class="row"><span>Email</span> <b id="acc_email"></b></div><div class="row"><span>Status</span> <b id="acc_status"></b></div></div></div>
+
+<!-- WITHDRAW -->
+<div id="withdraw" class="page container" style="max-width:500px;"><h2>Withdraw to M-Pesa</h2><div class="card"><form onsubmit="wd(event)"><label>Amount KSH</label><input id="wd_amount" type="number" min="100" placeholder="Min 100" required><label>M-Pesa Number</label><input id="wd_phone" type="tel" readonly><button id="wdBtn" class="btn btn-success" style="width:100%; margin-top:10px;"><span class="spinner"></span><span>Request Withdrawal</span></button></form></div></div>
+
+<!-- ACTIVATE -->
+<div id="activate" class="page container" style="max-width:500px;"><div class="card"><h2>Activate: KSH 99</h2><div class="card" style="background:#DBEAFE; text-align:center;"><p><b>Lipa na M-Pesa > Buy Goods</b></p><p style="font-size:1.8rem; color:var(--primary); font-weight:800;">3280910</p><p>Amount: <b>KSH 99</b></p></div><form onsubmit="act(event)"><label>M-Pesa Name</label><input id="mp_name" required><label>Transaction Code</label><input id="mp_code" required><label>Screenshot</label><input id="mp_ss" type="file" required><button id="subBtn" class="btn btn-success" style="width:100%;"><span class="spinner"></span><span>Submit for Approval</span></button></form></div></div>
+
+<script>
+let u = null;
+const TASKS = Array.from({length:20}, (_,i)=>({t:`Task ${i+1}`, p:300 + Math.floor(Math.random()*201)}));
+function toast(msg){ let t=document.getElementById('toast'); t.innerText=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2000); }
+function setLoading(btnId, loading){ const btn = document.getElementById(btnId); if(!btn) return; const spinner = btn.querySelector('.spinner'); btn.disabled = loading; if(spinner) spinner.style.display = loading? 'inline-block' : 'none'; }
+function show(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); if(id=='dashboard') load(); if(id=='tasks') loadTasks2(); if(id=='account') loadAccount(); if(id=='withdraw') loadWithdraw(); }
+function closeModal(){ document.getElementById('activationModal').classList.remove('active'); }
+function reg(e){ e.preventDefault(); setLoading('regBtn', true); setTimeout(()=>{ u={n:r_name.value,ph:r_phone.value,e:r_email.value,p:r_pass.value,a:0,b:0,er:0,tk:0}; localStorage.setItem('u',JSON.stringify(u)); toast('Account created'); setLoading('regBtn', false); load(); },800); }
+function log(e){ e.preventDefault(); setLoading('logBtn', true); setTimeout(()=>{ let x=JSON.parse(localStorage.getItem('u')); if(x&&x.e==l_email.value&&x.p==l_pass.value){u=x; toast('Login ok'); load();} else toast('Wrong login'); setLoading('logBtn', false); },800); }
+function load(){ u=JSON.parse(localStorage.getItem('u')); if(!u) return show('home'); document.getElementById('nav-guest').style.display='none'; document.getElementById('nav-user').style.display='flex'; document.getElementById('nav-name').innerText=u.n; document.getElementById('d_name').innerText=u.n; document.getElementById('d_bal').innerText=u.b; document.getElementById('d_earn').innerText=u.er; document.getElementById('d_done').innerText=u.tk; if(u.a!=1){document.getElementById('d_status').innerText='INACTIVE'; document.getElementById('d_status').style.color='#DC2626'; document.getElementById('activateBanner').style.display='block';} else {document.getElementById('d_status').innerText='ACTIVE'; document.getElementById('d_status').style.color='var(--success)'; document.getElementById('activateBanner').style.display='none';} document.getElementById('taskList').innerHTML=TASKS.slice(0,4).map((t,i)=>`<div class="task">${u.a!=1?`<div class="locked" onclick="document.getElementById('activationModal').classList.add('active')"><i class="fas fa-lock"></i><p>Tap to Unlock</p></div>`:''}<h4>${t.t}</h4><p>Earn KSH ${t.p}</p><button class="btn" id="taskBtn${i}" style="width:100%; background:${u.a==1?'var(--success)':'#94A3B8'}" onclick="doT(${i})"><span class="spinner"></span><span>Start Task</span></button></div>`).join(''); show('dashboard');}
+function loadTasks2(){ u=JSON.parse(localStorage.getItem('u')); document.getElementById('taskList2').innerHTML=TASKS.map((t,i)=>`<div class="task">${u.a!=1?`<div class="locked" onclick="document.getElementById('activationModal').classList.add('active')"><i class="fas fa-lock"></i><p>Tap to Unlock</p></div>`:''}<h4>${t.t}</h4><p>Earn KSH ${t.p}</p><button class="btn" id="taskBtnAll${i}" style="width:100%; background:${u.a==1?'var(--success)':'#94A3B8'}" onclick="doT(${i})"><span class="spinner"></span><span>Start Task</span></button></div>`).join(''); }
+function loadAccount(){ u=JSON.parse(localStorage.getItem('u')); document.getElementById('acc_name').innerText=u.n; document.getElementById('acc_balance').innerText=u.b.toFixed(2); document.getElementById('acc_fullname').innerText=u.n; document.getElementById('acc_phone').innerText=u.ph; document.getElementById('acc_email').innerText=u.e; document.getElementById('acc_status').innerText=u.a==1?'ACTIVE':'INACTIVE'; document.getElementById('acc_status').style.color=u.a==1?'var(--success)':'#DC2626'; }
+function loadWithdraw(){ u=JSON.parse(localStorage.getItem('u')); document.getElementById('wd_phone').value=u.ph; }
+function doT(i){ if(u.a!=1) return document.getElementById('activationModal').classList.add('active'); setLoading('taskBtn'+i,true); setLoading('taskBtnAll'+i,true); setTimeout(()=>{ u.b+=TASKS[i].p; u.er+=TASKS[i].p; u.tk++; localStorage.setItem('u',JSON.stringify(u)); toast(`+KSH ${TASKS[i].p}`); setLoading('taskBtn'+i,false); setLoading('taskBtnAll'+i,false); load(); },800); }
+function wd(e){ e.preventDefault(); setLoading('wdBtn',true); setTimeout(()=>{ let amt=parseFloat(wd_amount.value); if(amt>u.b) return toast('Insufficient balance'); if(amt<100) return toast('Min KSH 100'); u.b-=amt; localStorage.setItem('u',JSON.stringify(u)); toast(`Withdrawal of KSH ${amt} to ${u.ph} requested`); setLoading('wdBtn',false); show('account'); loadAccount(); },800); }
+function act(e){ e.preventDefault(); setLoading('subBtn',true); setTimeout(()=>{ u.a=1; localStorage.setItem('u',JSON.stringify(u)); toast('Account Activated!'); setLoading('subBtn',false); load(); },800); }
+function logout(){ localStorage.removeItem('u'); u=null; document.getElementById('nav-guest').style.display='flex'; document.getElementById('nav-user').style.display='none'; show('home'); }
+if(localStorage.getItem('u')) load();
+</script>
+</body>
+</html>
