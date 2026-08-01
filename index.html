@@ -1,362 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TaskPay KE - Earn Real KSH</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For BABE♥️</title>
 <style>
-:root {
-  --primary: #4F46E5;
-  --success: #22C55E;
-  --warning: #F59E0B;
-  --bg: #F1F5F9;
-  --card: #FFFFFF;
-  --border: #E2E8F0;
-  --text: #1E293B;
-  --text-dim: #64748B;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-body { background: var(--bg); color: var(--text); }
-.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-.page { display: none; }.page.active { display: block; }
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
-.navbar { background: var(--card); padding: 16px 20px; position: sticky; top: 0; z-index: 99; border-bottom:1px solid var(--border); }
-.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; }
-.nav-btns { display: flex; gap: 12px; align-items:center; }
-.btn { padding: 12px 22px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
-.btn:active{transform:scale(0.96)}
-.btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-.btn-success { background: var(--success); color: #fff; }
-.btn-warning { background: var(--warning); color: #fff; }
-.btn-dark { background: var(--text); color:#fff; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    height:100vh;
+    background: radial-gradient(circle at 20% 50%, #ff006e, #8338ec, #3a86ff, #000);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    overflow:hidden;
+    display:flex;justify-content:center;align-items:center;
+    font-family: 'Outfit', sans-serif;
+  }
+  @keyframes gradientShift{
+    0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+  }
 
-.hero { padding: 60px 20px 80px; text-align: center; background: linear-gradient(135deg, #EEF2FF, #F8FAFC); }
-.hero-img { width: 100%; max-width: 500px; margin: 0 auto 30px; border-radius: 20px; }
-.hero h1 { font-size: 2.8rem; font-weight: 800; }
-.hero h1 span { color: var(--success); }
+.loader{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    z-index:999;transition:1s;
+  }
+.loader.hide{opacity:0;pointer-events:none}
+.loader-text{
+    color:#ff006e;font-size:1.5rem;font-weight:600;margin-bottom:20px;
+    animation:pulse 1.5s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1} 50%{opacity:0.4}}
+.progress{
+    width:300px;height:4px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;
+  }
+.progress-bar{
+    height:100%;width:0%;background:linear-gradient(90deg,#ff006e,#3a86ff);
+    animation:load 3s ease forwards;
+  }
+  @keyframes load{to{width:100%}}
 
-.card { background: var(--card); padding: 28px; border-radius: 20px; margin-bottom: 20px; border:1px solid var(--border); }
-label { font-weight: 600; font-size: 0.9rem; color:var(--text-dim); }
-input { width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--border); color:var(--text); border-radius: 12px; margin: 8px 0 18px; font-size: 1rem; }
+.glass{
+    width:90%;max-width:500px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 40px 30px;
+    text-align:center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transform:translateY(50px);opacity:0;
+    transition:1.5s;
+  }
+.glass.show{transform:translateY(0);opacity:1}
 
-/* NEW PRO MENU - BOTTOM NAV STYLE */
-.menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0 30px; }
-.menu-item { background: var(--card); padding: 16px 10px; border-radius: 16px; text-align: center; font-weight: 600; cursor: pointer; border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; gap:6px; font-size:0.85rem; }
-.menu-item i{font-size:1.4rem; color:var(--primary)}
-.menu-item.active { background: var(--primary); color: #fff; }
-.menu-item.active i{color:#fff}
+.photo{
+    width:180px;height:180px;border-radius:50%;
+    object-fit:cover;border:3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 40px rgba(255,0,110,0.6);
+    margin-bottom:20px;
+  }
 
-/* NEW PRO STATS - 2x2 CARDS */
-.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.stat { background: var(--card); padding: 20px; border-radius: 16px; border:1px solid var(--border); display:flex; flex-direction:column; gap:8px; }
-.stat-top{display:flex; justify-content:space-between; align-items:center;}
-.stat-icon{width:45px; height:45px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem;}
-.stat h4 { font-size: 0.9rem; color:var(--text-dim); font-weight:500; }
-.stat h2 { color: var(--text); font-size: 1.8rem; font-weight:800; }
-.stat h2 span{color:var(--success)}
+  h1{
+    font-size:2rem;font-weight:800;
+    background: linear-gradient(90deg, #ff006e, #ffbe0b, #3a86ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom:15px;
+  }
+.message{
+    color: rgba(255,255,255,0.9);
+    font-size:1rem;font-weight:300;
+    line-height:1.8;text-align:left;
+    max-height:250px;overflow-y:auto;padding-right:10px;min-height:200px;
+  }
+.message::-webkit-scrollbar{width:4px}
+.message::-webkit-scrollbar-thumb{background:#ff006e;border-radius:10px}
+.cursor{
+    display:inline-block;width:2px;height:18px;background:#ff006e;
+    animation:blink 0.8s infinite;vertical-align:text-bottom;margin-left:2px;
+  }
+  @keyframes blink{50%{opacity:0}}
 
-.tasks { display: grid; grid-template-columns: 1fr; gap: 18px; }
-@media (min-width: 600px) {.tasks { grid-template-columns: repeat(2, 1fr); } }
-.task { background: var(--card); padding: 22px; border-radius: 16px; position: relative; border:1px solid var(--border); }
-.task h4{font-size:1.1rem; margin-bottom:6px;}
-.task p{color:var(--text-dim); font-size:1rem; margin-bottom:12px;}
-.task p b{color:var(--success); font-size:1.2rem;}
-.locked { position: absolute; inset: 0; background: rgba(241,245,249,0.9); color: var(--text); display: flex; flex-direction:column; align-items: center; justify-content: center; border-radius: 16px; font-weight: 700; gap:8px; border:2px dashed var(--border); }
-.locked i{font-size:1.8rem; color:var(--warning)}
-.toast { position: fixed; bottom: 24px; right: 24px; background: var(--success); color: #fff; padding: 16px 20px; border-radius: 12px; display: none; z-index: 999; font-weight:600; }
-.row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.particle{
+    position:absolute;width:3px;height:3px;
+    background:#fff;border-radius:50%;
+    box-shadow:0 0 10px #fff;
+    animation: rise 10s infinite linear;
+  }
+  @keyframes rise{
+    0%{transform:translateY(100vh) scale(0); opacity:0}
+    50%{opacity:1}
+    100%{transform:translateY(-10vh) scale(1.5); opacity:0}
+  }
 </style>
 </head>
 <body>
 
-<div class="toast" id="toast"></div>
-
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="logo"><i class="fas fa-bridge"></i> TaskPay KE</div>
-    <div id="nav-guest" class="nav-btns">
-      <button class="btn btn-outline" onclick="go('login')">Login</button>
-      <button class="btn btn-success" onclick="go('register')">Register</button>
-    </div>
-    <div id="nav-user" class="nav-btns" style="display:none;">
-      <b style="color:var(--success); font-size:1.1rem;">KSH <span id="nav-bal">0</span></b>
-      <button class="btn btn-dark" onclick="logout()">Logout</button>
-    </div>
-  </div>
-</nav>
-
-<!-- HOME -->
-<div id="home" class="page active">
-  <section class="hero">
-    <img src="https://i.postimg.cc/BZBtBL4g/Gemini-Generated-Image-pv8ovbpv8ovbpv8o.png" class="hero-img">
-    <h1>Earn Real <span>KSH</span> From Your Phone</h1>
-    <p>Complete 20+ Premium Tasks Daily. Instant Withdraw to M-Pesa. KSH 300-500 per task</p>
-    <button class="btn btn-success" style="padding:18px 36px; font-size:1.1rem;" onclick="go('register')">Get Started Free <i class="fas fa-arrow-right"></i></button>
-  </section>
+<!-- LOADING -->
+<div class="loader" id="loader">
+  <div class="loader-text">TO YOU MY LOVE[tetyoo]♥️...</div>
+  <div class="progress"><div class="progress-bar"></div></div>
 </div>
 
-<!-- REGISTER -->
-<div id="register" class="page container" style="max-width:500px; padding-top:60px;">
-  <div class="card"><h2 style="margin-bottom:20px; font-size:1.8rem;">Create Account</h2>
-    <form onsubmit="register(event)">
-      <label>Full Name</label><input id="r_name" required>
-      <label>Phone Number</label><input id="r_phone" required>
-      <label>Email</label><input id="r_email" type="email" required>
-      <label>Password</label><input id="r_pass" type="password" required>
-      <button class="btn btn-success" style="width:100%; padding:16px;">Create Account</button>
-    </form>
-  </div>
-</div>
-
-<!-- LOGIN -->
-<div id="login" class="page container" style="max-width:500px; padding-top:60px;">
-  <div class="card"><h2 style="margin-bottom:20px; font-size:1.8rem;">Welcome Back</h2>
-    <form onsubmit="login(event)">
-      <label>Email</label><input id="l_email" type="email" required>
-      <label>Password</label><input id="l_pass" type="password" required>
-      <button class="btn" style="width:100%; padding:16px;">Login</button>
-    </form>
-  </div>
-</div>
-
-<!-- DASHBOARD - NEW LAYOUT -->
-<div id="dashboard" class="page container">
-  <h2 style="font-size:2rem;">Welcome, <span id="d_name"></span> 👋</h2>
-  <p style="color:var(--text-dim); margin-bottom:20px;">Status: <b id="d_status" style="color:var(--warning)">INACTIVE</b></p>
-
-  <div id="activateBanner" class="card" style="background:#FEF3C7; color:#92400E; display:none;">
-    <h3><i class="fas fa-lock"></i> Account Inactive</h3>
-    <p>Pay KSH 200 to unlock all 20 tasks</p>
-    <button class="btn btn-warning" style="width:100%; margin-top:10px;" onclick="go('activate')">Activate Now</button>
-  </div>
-  <div id="pendingBanner" class="card" style="background:#DBEAFE; color:#1E40AF; display:none;">
-    <h3><i class="fas fa-clock"></i> Approval Pending</h3>
-  </div>
-
-  <!-- PRO MENU WITH ICONS -->
-  <div class="menu">
-    <div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div>
-    <div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div>
-    <div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div>
-    <div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div>
-  </div>
-
-  <!-- PRO STATS CARDS -->
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-top">
-        <h4>Balance</h4>
-        <div class="stat-icon" style="background:#DCFCE7; color:var(--success)"><i class="fas fa-wallet"></i></div>
-      </div>
-      <h2>KSH <span id="d_bal">0</span></h2>
-    </div>
-    <div class="stat">
-      <div class="stat-top">
-        <h4>Total Earned</h4>
-        <div class="stat-icon" style="background:#DBEAFE; color:var(--primary)"><i class="fas fa-chart-line"></i></div>
-      </div>
-      <h2>KSH <span id="d_earn">0</span></h2>
-    </div>
-    <div class="stat">
-      <div class="stat-top">
-        <h4>Tasks Done</h4>
-        <div class="stat-icon" style="background:#FEE2E2; color:#EF4444"><i class="fas fa-check-circle"></i></div>
-      </div>
-      <h2 id="d_done">0</h2>
-    </div>
-    <div class="stat">
-      <div class="stat-top">
-        <h4>Available Tasks</h4>
-        <div class="stat-icon" style="background:#FEF3C7; color:var(--warning)"><i class="fas fa-briefcase"></i></div>
-      </div>
-      <h2>20</h2>
-    </div>
-  </div>
-
-  <h3 style="margin-top:30px; font-size:1.4rem;">Recent Tasks</h3>
-  <div class="tasks" id="taskList"></div>
-</div>
-
-<!-- TASKS -->
-<div id="tasks" class="page container"><h2 style="font-size:2rem; margin-bottom:10px;">All Premium Tasks</h2>
-  <div class="menu"><div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div><div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div><div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div><div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div></div>
-  <div class="tasks" id="taskList2"></div>
-</div>
-
-<!-- ACCOUNT -->
-<div id="account" class="page container" style="max-width:700px;"><h2 style="font-size:2rem; margin-bottom:10px;">My Account</h2>
-  <div class="menu"><div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div><div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div><div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div><div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div></div>
-  <div class="card"><h3 id="acc_name" style="font-size:1.5rem;"></h3><h2 style="color:var(--success); margin:15px 0; font-size:2.2rem;">KSH <span id="acc_balance">0</span></h2><div class="row"><span>Phone</span> <b id="acc_phone"></b></div><div class="row"><span>Email</span> <b id="acc_email"></b></div><div class="row"><span>Status</span> <b id="acc_status"></b></div></div>
-</div>
-
-<!-- WITHDRAW -->
-<div id="withdraw" class="page container" style="max-width:600px;"><h2 style="font-size:2rem; margin-bottom:10px;">Withdraw to M-Pesa</h2>
-  <div class="menu"><div class="menu-item" onclick="go('dashboard')"><i class="fas fa-home"></i> Dashboard</div><div class="menu-item" onclick="go('tasks')"><i class="fas fa-tasks"></i> Tasks</div><div class="menu-item" onclick="go('account')"><i class="fas fa-user"></i> Account</div><div class="menu-item" onclick="go('withdraw')"><i class="fas fa-wallet"></i> Withdraw</div></div>
-  <div class="card"><form onsubmit="withdraw(event)"><label>Amount KSH</label><input id="wd_amount" type="number" min="100" required><label>M-Pesa Number</label><input id="wd_phone" readonly><button class="btn btn-success" style="width:100%; padding:16px;">Request Withdrawal</button></form></div>
-</div>
-
-<!-- ACTIVATE -->
-<div id="activate" class="page">
-  <div style="min-height:100vh; padding:30px 20px; background:var(--bg);">
-    <div class="container" style="max-width:550px;">
-      <button onclick="go('dashboard')" class="btn btn-dark" style="margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back</button>
-      <div class="card" style="padding:0;">
-        <div style="background: var(--primary); padding:35px 25px; text-align:center; color:#fff;">
-          <i class="fas fa-crown" style="font-size:2.2rem;"></i>
-          <h2 style="margin:10px 0 0; font-size:2rem;">Premium Activation</h2>
-        </div>
-        <div style="padding:30px 25px;">
-          <div class="card" style="background:#FEF3C7; color:#92400E; text-align:center;">
-            <p>One Time Activation Fee</p><h1 style="color:var(--warning); font-size:2.8rem; margin:8px 0;">KSH 200</h1>
-          </div>
-          <div class="card" style="background:var(--bg);">
-            <p style="text-align:center; margin-bottom:12px; font-weight:700; color:var(--primary);"><i class="fas fa-mobile-screen-button"></i> Pay via M-Pesa</p>
-            <div style="background:var(--card); border-radius:12px; padding:20px; text-align:center; border:1px solid var(--border);">
-              <p>Lipa Na M-Pesa > Buy Goods</p><h2 style="margin:10px 0; font-size:2.2rem; letter-spacing:3px;">3280910</h2>
-              <button onclick="navigator.clipboard.writeText('3280910'); toast('Till Copied!')" class="btn btn-success" style="width:100%;"><i class="fas fa-copy"></i> Copy Till</button>
-            </div>
-            <p style="text-align:center; margin-top:15px; font-weight:700; font-size:1.2rem;">Amount: <span style="color:var(--warning); font-size:1.5rem;">KSH 200 </span></p>
-          </div>
-          <form onsubmit="activate(event)">
-            <label>M-Pesa Account Name</label><input id="mp_name" required>
-            <label>Transaction Code</label><input id="mp_code" required>
-            <label>Payment Screenshot</label><input id="mp_ss" type="file" accept="image/*" required>
-            <button class="btn btn-success" style="width:100%; padding:18px;"><i class="fas fa-shield-check"></i> Submit for Approval</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- MAIN CONTENT -->
+<div class="glass" id="glass">
+  <img src="https://i.postimg.cc/jdkNMpvp/IMG-20260327-WA0054(1).jpg" class="photo" alt="BABE">
+  <h1>Happy Girlfriend's Day BABE♥️</h1>
+  <div class="message" id="message"></div><span class="cursor" id="cursor"></span>
 </div>
 
 <script>
-let user = null;
-const TASKS = Array.from({length:20}, (_,i)=>({name:`Task ${i+1}`, pay:300 + Math.floor(Math.random()*201)}));
+const fullMessage = `HEY BABE ♥️
 
-function toast(msg){ let t=document.getElementById('toast'); t.innerText=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
+Am happy to celebrate 4 months down the line with you, it's been as sweet as I can't put it in words. Nakupenda sana mine, you have been true since, showed up to me several times and I appreciate it 🙏
 
-function go(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(page).classList.add('active');
-  document.querySelectorAll('.menu-item').forEach(m=>m.classList.remove('active'));
-  document.querySelectorAll(`.menu-item[onclick*="${page}"]`).forEach(m=>m.classList.add('active'));
-  if(page=='dashboard') loadDashboard();
-  if(page=='tasks') loadTasks();
-  if(page=='account') loadAccount();
-  if(page=='withdraw') loadWithdraw();
-}
+Today being girlfriend's day,am happy to celebrate you as my genuine and a true partner 🫶🥰. Uko mstrong sana dee!
+Enjoy your day 💖
 
-function register(e){
-  e.preventDefault();
-  user = {name:r_name.value, phone:r_phone.value, email:r_email.value, pass:r_pass.value, status:0, bal:0, earned:0, done:0};
-  localStorage.setItem('tp_user', JSON.stringify(user));
-  toast('Account Created');
-  document.getElementById('nav-guest').style.display='none';
-  document.getElementById('nav-user').style.display='flex';
-  document.getElementById('nav-bal').innerText=user.bal;
-  go('dashboard');
-}
+Been busy all day, didn't even get enough time for, didn't bought presents for you, but I know you gonna understand Me babe 😔🥰
 
-function login(e){
-  e.preventDefault();
-  let saved = JSON.parse(localStorage.getItem('tp_user'));
-  if(saved && saved.email==l_email.value && saved.pass==l_pass.value){
-    user = saved;
-    toast('Login Success');
-    document.getElementById('nav-guest').style.display='none';
-    document.getElementById('nav-user').style.display='flex';
-    document.getElementById('nav-bal').innerText=user.bal;
-    go('dashboard');
-  } else toast('Invalid details');
-}
+Nakupenda sana, tena sana and I'm here to stay and build a future with you ♥️
 
-function loadDashboard(){
-  user = JSON.parse(localStorage.getItem('tp_user')); if(!user) return go('home');
-  document.getElementById('d_name').innerText=user.name;
-  document.getElementById('d_bal').innerText=user.bal;
-  document.getElementById('nav-bal').innerText=user.bal;
-  document.getElementById('d_earn').innerText=user.earned;
-  document.getElementById('d_done').innerText=user.done;
-  if(user.status==0){document.getElementById('d_status').innerText='INACTIVE'; document.getElementById('d_status').style.color='#EF4444'; document.getElementById('activateBanner').style.display='block';}
-  if(user.status=='pending'){document.getElementById('d_status').innerText='PENDING'; document.getElementById('d_status').style.color='#3B82F6'; document.getElementById('pendingBanner').style.display='block';}
-  if(user.status==1){document.getElementById('d_status').innerText='ACTIVE'; document.getElementById('d_status').style.color='var(--success)';}
-  document.getElementById('taskList').innerHTML = TASKS.slice(0,4).map((t,i)=>`
-    <div class="task">
-      <h4>${t.name}</h4>
-      <p>Earn <b>KSH ${t.pay}</b></p>
-      ${user.status!=1? `<div class="locked"><i class="fas fa-lock"></i><p>Locked</p></div>` : ''}
-      <button class="btn" style="width:100%; background:${user.status==1?'var(--success)':'#CBD5E1'}" onclick="doTask(${i})">Start Task</button>
-    </div>
-  `).join('');
-}
+ILYSM 💖💖💖`;
 
-function loadTasks(){
-  user = JSON.parse(localStorage.getItem('tp_user'));
-  document.getElementById('taskList2').innerHTML = TASKS.map((t,i)=>`
-    <div class="task">
-      <h4>${t.name}</h4>
-      <p>Earn <b>KSH ${t.pay}</b></p>
-      ${user.status!=1? `<div class="locked"><i class="fas fa-lock"></i><p>Locked</p></div>` : ''}
-      <button class="btn" style="width:100%; background:${user.status==1?'var(--success)':'#CBD5E1'}" onclick="doTask(${i})">Start Task</button>
-    </div>
-  `).join('');
-}
-
-function loadAccount(){
-  user = JSON.parse(localStorage.getItem('tp_user'));
-  document.getElementById('acc_name').innerText=user.name;
-  document.getElementById('acc_balance').innerText=user.bal;
-  document.getElementById('acc_phone').innerText=user.phone;
-  document.getElementById('acc_email').innerText=user.email;
-  document.getElementById('acc_status').innerText=user.status==0?'INACTIVE':user.status=='pending'?'PENDING':'ACTIVE';
-}
-
-function loadWithdraw(){ user = JSON.parse(localStorage.getItem('tp_user')); document.getElementById('wd_phone').value=user.phone; }
-
-function doTask(i){
-  if(user.status!=1) return toast('Account not active');
-  user.bal += TASKS[i].pay; user.earned += TASKS[i].pay; user.done += 1;
-  localStorage.setItem('tp_user', JSON.stringify(user));
-  toast(`+KSH ${TASKS[i].pay}`);
-  loadDashboard();
-}
-
-function withdraw(e){
-  e.preventDefault();
-  let amt = parseFloat(wd_amount.value);
-  if(amt>user.bal) return toast('No balance');
-  user.bal -= amt;
-  localStorage.setItem('tp_user', JSON.stringify(user));
-  toast('Withdrawal requested'); go('account');
-}
-
-function activate(e){
-  e.preventDefault();
-  user.status = 'pending';
-  localStorage.setItem('tp_user', JSON.stringify(user));
-  toast('Submitted for approval'); go('dashboard');
-}
-
-function logout(){
-  localStorage.removeItem('tp_user');
-  user=null;
-  document.getElementById('nav-guest').style.display='flex';
-  document.getElementById('nav-user').style.display='none';
-  go('home');
-}
-
-window.onload = ()=>{
-  let saved = localStorage.getItem('tp_user');
-  if(saved){
-    user = JSON.parse(saved);
-    document.getElementById('nav-guest').style.display='none';
-    document.getElementById('nav-user').style.display='flex';
-    document.getElementById('nav-bal').innerText=user.bal;
-    go('dashboard');
+let i = 0;
+function typeWriter(){
+  if(i < fullMessage.length){
+    document.getElementById('message').innerHTML += fullMessage[i] === '\n'? '<br>' : fullMessage[i];
+    i++;
+    document.getElementById('message').scrollTop = document.getElementById('message').scrollHeight;
+    setTimeout(typeWriter, 90); // SLOWER TYPING SPEED
+  } else {
+    document.getElementById('cursor').style.display = 'none';
   }
 }
+
+// Loading then show + start typing
+setTimeout(()=>{
+  document.getElementById('loader').classList.add('hide');
+  document.getElementById('glass').classList.add('show');
+  setTimeout(typeWriter, 800);
+}, 3000);
+
+// Particles
+function createParticle(){
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random()*100 + 'vw';
+  p.style.animationDuration = Math.random()*5 + 5 + 's';
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(), 10000);
+}
+setInterval(createParticle, 150);
+
+// 3D tilt
+const glass = document.getElementById('glass');
+document.addEventListener('mousemove', (e)=>{
+  let x = (window.innerWidth/2 - e.pageX)/25;
+  let y = (window.innerHeight/2 - e.pageY)/25;
+  glass.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+})
 </script>
 </body>
-  </html>
+</html>
